@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  app:
+    image: wekanteam/wekan:v3.56
+    container_name: wekan-app
+    restart: always
+    links:
+      - mongo
+    environment:
+      - MONGO_URL=mongodb://mongo/wekan
+      - ROOT_URL=http://<<YOUR SERVER ADDRESS>>:<<YOUR HTTP PORT>>/
+    ports:
+      - <<YOUR HTTP PORT>>:8080
+
+  mongo:
+    image: mongo:3.6.16
+    container_name: wekan-mongo
+    restart: always
+    volumes:
+      - <<YOUR DIRECTORY PATH>>:/data/db
